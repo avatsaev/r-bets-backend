@@ -20,6 +20,7 @@ class Bet < ApplicationRecord
 
   def as_json(opts={})
 
+
     json = {
       id: id,
       title: title,
@@ -27,9 +28,9 @@ class Bet < ApplicationRecord
       answer_b: answer_b,
       answer_a_count: answer_a_count,
       answer_b_count: answer_b_count,
-      state: state,
       ends_at: ends_at,
       ended: ended?,
+      state: state,
       created_at: created_at,
     }
 
@@ -39,7 +40,7 @@ class Bet < ApplicationRecord
 
   def ended?
 
-    if self.state == "closed"
+    if self.closed?
       true
     elsif self.ends_at and self.ends_at < DateTime.now
       self.close
