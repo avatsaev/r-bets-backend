@@ -18,12 +18,9 @@ class Bet < ApplicationRecord
 
   end
 
-
   def as_json(opts={})
 
-    json = {}
-
-    json = json.merge({
+    json = {
       id: id,
       title: title,
       answer_a: answer_a,
@@ -32,13 +29,26 @@ class Bet < ApplicationRecord
       answer_b_count: answer_b_count,
       state: state,
       ends_at: ends_at,
+      ended: ended?,
       created_at: created_at,
-    })
+    }
 
     json
 
   end
 
+  def ended?
+
+    if self.state == "closed"
+      true
+    elsif self.ends_at and self.ends_at < DateTime.now
+      self.close
+      true
+    else
+      false
+    end
+
+  end
 
   private
 

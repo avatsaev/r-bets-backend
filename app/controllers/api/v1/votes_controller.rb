@@ -21,11 +21,20 @@ class Api::V1::VotesController < ApplicationController
     @vote = @bet.votes.new(vote_params)
     @vote.ip_addr = request.remote_ip
 
-    if @vote.save
-      render json: @vote, status: :created, location: api_v1_bet_votes_url(@bet, @vote)
+
+    if @bet.ended?
+      render json: {error: "EXPIRED", msg: "Bets are closed.", status: :success}
     else
-      render json: @vote.errors, status: :unprocessable_entity
+
+
+      if @vote.save
+        render json: @vote, status: :created, location: api_v1_bet_votes_url(@bet, @vote)
+      else
+        render json: @vote.errors, status: :unprocessable_entity
+      end
+
     end
+
   end
 
   # PATCH/PUT /votes/1
