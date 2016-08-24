@@ -47,7 +47,7 @@ class Api::V1::BetsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bet_params
-      params.require(:bet).permit(:title, :answer_a, :answer_b, :ends_at)
+      params.require(:bet).permit(:title, :answer_a, :answer_b, :ends_at, :state)
     end
 
 
