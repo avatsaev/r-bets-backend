@@ -5,8 +5,9 @@ class Vote < ApplicationRecord
 
   validates :answer, presence: true
 
-  validates :ip_addr, uniqueness: { scope: :bet_id, message: "You've already voted on this bet" }
-  validates :username, uniqueness: { scope: :bet_id, message: "This username already voted on this bet" }
+  #validates :ip_addr, uniqueness: { scope: :bet_id, message: "You've already voted on this bet" }
+
+  validates :username, uniqueness: { scope: [:bet_id, :answer], message: "This username already voted on this bet" }
 
   after_create :increment_bet_vote_count
 
