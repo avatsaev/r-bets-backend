@@ -32,7 +32,7 @@ module RBets
     config.cache_store = :redis_store, ENV['CACHE_URL'],
                          { namespace: 'r-bets-backend::cache' }
 
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
 
     config.active_record.raise_in_transactional_callbacks = true
     config.api_only = true

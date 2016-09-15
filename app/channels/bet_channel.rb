@@ -20,7 +20,7 @@ class BetChannel < ApplicationCable::Channel
 
       if (vote.valid?)
         vote.save!
-        broadcast("bet_channel_#{params[:bet_id]}", {event: 'new_vote', bet: bet, vote: vote})
+        #broadcast("bet_channel_#{params[:bet_id]}", {event: 'new_vote', bet: bet, vote: vote})
       end
 
     end

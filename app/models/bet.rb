@@ -28,11 +28,18 @@ class Bet < ApplicationRecord
       answer_b: answer_b,
       answer_a_count: answer_a_count,
       answer_b_count: answer_b_count,
-      ends_at: ends_at,
-      ended: ended?,
       state: state,
       created_at: created_at,
     }
+
+    if ends_at.present?
+
+      json = json.merge({
+                            ends_at: ends_at,
+                            ended: ended?
+                        })
+
+    end
 
     json
 
