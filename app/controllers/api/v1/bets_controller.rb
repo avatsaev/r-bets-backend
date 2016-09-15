@@ -4,14 +4,37 @@ class Api::V1::BetsController < ApplicationController
 
   # GET /bets
   def index
-    @bets = Bet.all
 
-    render json: @bets
+    if params[:last]
+      @bets = Bet.last(params[:last])
+    else
+      @bets = Bet.all
+    end
+
+    render json: {
+        bets: @bets,
+        status: 'success',
+        error: nil
+      }, status: :ok
+
   end
 
   # GET /bets/1
   def show
-    render json: @bet
+    if @bet.present?
+      render json: {
+          bet: @bet,
+          status: 'success',
+          error: nil
+      }, status: :ok
+    else
+      render json: {
+        bet: nil,
+        status: 'error',
+        error: 'Bet not found'
+      }, status: :not_found
+    end
+
   end
 
   # POST /bets
@@ -42,7 +65,7 @@ class Api::V1::BetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bet
-      @bet = Bet.find(params[:id])
+      @bet = Bet.find_by_id(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

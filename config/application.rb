@@ -25,6 +25,16 @@ module RBets
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+    config.log_level = :debug
+    config.log_tags  = [:subdomain, :uuid]
+    config.logger    = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+
+    config.cache_store = :redis_store, ENV['CACHE_URL'],
+                         { namespace: 'r-bets-backend::cache' }
+
+    config.active_job.queue_adapter = :sidekiq
+
+    config.active_record.raise_in_transactional_callbacks = true
     config.api_only = true
 
   end
