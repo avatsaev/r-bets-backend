@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  require 'sidekiq/web'
+
+  #require 'sidekiq/web'
+  #mount Sidekiq::Web => '/sidekiq'
+
   mount ActionCable.server => '/cable'
-  mount Sidekiq::Web => '/sidekiq'
+
   
   namespace :api, :defaults => { :format => 'json' } do
 
@@ -14,6 +17,8 @@ Rails.application.routes.draw do
     end
 
   end
+
+  root to: "application#health_check"
 
 
 

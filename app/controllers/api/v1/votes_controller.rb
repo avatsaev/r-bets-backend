@@ -23,7 +23,10 @@ class Api::V1::VotesController < ApplicationController
 
 
     if @bet.ended?
-      render json: {error: "EXPIRED", msg: "Bets are closed.", status: :success}
+      render json: {
+          error: "EXPIRED",
+          msg: "Bets are closed."
+      }, status: :success
     else
 
 
