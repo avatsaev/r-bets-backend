@@ -10,6 +10,9 @@ class Vote < ApplicationRecord
   #validates :username, uniqueness: { scope: [:bet_id, :answer], message: "This username already voted on this bet" }
 
   after_create :increment_bet_vote_count
+  #after_commit :broadcast_vote
+
+
   after_commit {BroadcastVoteJob.perform_later(self)}
 
   def as_json(opts={})
@@ -27,6 +30,10 @@ class Vote < ApplicationRecord
   end
 
   private
+
+    # def broadcast_vote
+    #   BroadcastVoteJob.perform_later(self)
+    # end
 
     def increment_bet_vote_count
 

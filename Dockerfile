@@ -5,8 +5,6 @@ MAINTAINER Aslan Vatsaev (@avatsaev)
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
       build-essential nodejs libpq-dev
 
-RUN gem install sidekiq
-
 ENV INSTALL_PATH /r_bets_backend
 RUN mkdir -p $INSTALL_PATH
 

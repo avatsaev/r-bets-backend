@@ -19,6 +19,18 @@ services:
     volumes:
       - 'redis:/var/lib/redis/data'
 
+
+  sidekiq: 
+    depends_on: 
+      - 'postgres' 
+      - 'redis' 
+    build: . 
+    command: sidekiq -C config/sidekiq.yml.erb 
+    volumes: 
+      - '.:/r_bets_backend' 
+    env_file: 
+      - '.env'
+
   website:
     depends_on:
       - 'postgres'
