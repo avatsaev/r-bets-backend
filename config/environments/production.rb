@@ -69,10 +69,11 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins '*.nano-cloud.org'
-      resource '*', :headers => :any, :methods => [:get, :post, :options]
+      origins ['*.nano-cloud.org', 'prod-env.mieqinurgp.us-east-1.elasticbeanstalk.com']
+      resource '*', :headers => :any, :methods => [:get, :post]
     end
   end
+
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

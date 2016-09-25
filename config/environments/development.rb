@@ -26,13 +26,12 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.action_cable.allowed_request_origins = ['http://localhost:4200']
+  config.action_cable.allowed_request_origins = [ 'localhost', '127.0.0.1']
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
       origins 'localhost', '127.0.0.1'
-      #origins "*"
-      resource '*', :headers => :any, :methods => [:get, :post, :options]
+      resource '*', :headers => :any, :methods => [:get, :post]
     end
   end
 
