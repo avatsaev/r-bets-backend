@@ -1,4 +1,4 @@
-class Api::V1::VotesController < ApplicationController
+class Api::V1::VotesController < Api::V1::ApiController
 
 
   # before_action :set_vote, only: [:show, :update, :destroy]

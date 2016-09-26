@@ -69,8 +69,8 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins ['rbets.nano-cloud.org', 'prod-env.mieqinurgp.us-east-1.elasticbeanstalk.com']
-      resource '*', :headers => :any, :methods => [:get, :post]
+      origins ['http://rbets.nano-cloud.org', 'http://prod-env.mieqinurgp.us-east-1.elasticbeanstalk.com']
+      resource '*', :headers => :any, :methods => [:get, :post, :options]
     end
   end
 

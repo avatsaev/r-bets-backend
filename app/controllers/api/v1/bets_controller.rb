@@ -1,6 +1,6 @@
-class Api::V1::BetsController < ApplicationController
+class Api::V1::BetsController < Api::V1::ApiController
 
-  before_action :set_bet, only: [:show, :update, :destroy]
+before_action :set_bet, only: [:show, :update, :destroy]
 
   # GET /bets
   def index
