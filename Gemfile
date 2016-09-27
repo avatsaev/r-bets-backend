@@ -24,6 +24,10 @@ gem "rack-timeout"
 gem 'rack-cors'
 # gem 'redis', '~> 3.0'
 # gem 'redis-store'
+
+gem 'rack-attack'
+gem 'jwt'
+
 gem 'redis-rails'
 
 gem 'sidekiq'
