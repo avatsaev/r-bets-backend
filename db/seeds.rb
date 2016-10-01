@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ApiApp.create(name: "RBets Production", access_level: 0, web_app: true, :origin_domain => "rbets.nano-cloud.org", test_mode: false)
+

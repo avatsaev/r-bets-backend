@@ -67,10 +67,18 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  ac_origins = ENV['ACTION_CABLE_ALLOWED_REQUEST_ORIGINS'].split(',')
+  ac_origins.map! { |url| /#{url}/ }
+  config.action_cable.allowed_request_origins = ac_origins
+
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://rbets.nano-cloud.org', 'http://prod-env.mieqinurgp.us-east-1.elasticbeanstalk.com'
-      resource '*', :headers => :any, :methods => [:get, :post]
+
+      cors_origins = ENV['CORS_ALLOWED_ORIGINS'].split(',')
+      cors_origins.map! { |url| /#{url}/ }
+
+      origins cors_origins
+      resource '*', :headers => :any, :methods => [:get, :post, :options]
     end
   end
 

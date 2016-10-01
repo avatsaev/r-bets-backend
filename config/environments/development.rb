@@ -26,13 +26,26 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  config.action_cable.allowed_request_origins = [ 'localhost', '127.0.0.1']
+  ac_origins = ENV['ACTION_CABLE_ALLOWED_REQUEST_ORIGINS'].split(',')
+  ac_origins.map! { |url| /#{url}/ }
+  config.action_cable.allowed_request_origins = ac_origins
+
+  p "-----------------------------------------------------------//"
+  p ac_origins
 
   config.middleware.insert_before 0, Rack::Cors do
+
+    cors_origins = ENV['CORS_ALLOWED_ORIGINS'].split(',')
+    cors_origins.map! { |url| /#{url}/ }
+
+    p "======================================================//"
+    p cors_origins
+
     allow do
-      origins /\Ahttp:\/\/localhost.*/, /\Ahttp:\/\/127\.0\.0\.1.*/
+      origins cors_origins
       resource '*', :headers => :any, :methods => [:get, :post, :options]
     end
+
   end
 
 

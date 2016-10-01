@@ -26,7 +26,6 @@ gem 'rack-cors'
 # gem 'redis-store'
 
 gem 'rack-attack'
-gem 'jwt'
 
 gem 'redis-rails'
 
