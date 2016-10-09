@@ -41,6 +41,7 @@ before_action :set_bet, only: [:show, :update, :destroy]
   def create
     @bet = Bet.new(bet_params)
 
+
     if @bet.save
       render json: @bet, status: :created, location: api_v1_bet_url(@bet)
     else

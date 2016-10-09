@@ -26,6 +26,7 @@ class Api::V1::VotesController < Api::V1::ApiController
     @vote = @bet.votes.new(vote_params)
     @vote.ip_addr = request.remote_ip
 
+    tmp_vote = Vote.where(ip_addr:  @vote.ip_addr,  bet_id: @bet.id)
 
     if @bet.ended?
       render json: {
@@ -33,6 +34,15 @@ class Api::V1::VotesController < Api::V1::ApiController
           error: "EXPIRED",
           msg: "Bets are closed."
       }, status: :ok
+      return
+
+    elsif tmp_vote.present?
+      render json: {
+          status: 'error',
+          error: "ALREADY_VOTED",
+          msg: "You've already voted on this"
+      }, status: :ok
+      return
     else
 
       if @vote.answer != "a" and @vote.answer != "b"
