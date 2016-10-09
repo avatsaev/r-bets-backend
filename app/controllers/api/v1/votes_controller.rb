@@ -24,7 +24,7 @@ class Api::V1::VotesController < Api::V1::ApiController
   # POST /votes
   def create
     @vote = @bet.votes.new(vote_params)
-    @vote.ip_addr = request.remote_ip
+    @vote.ip_addr = params[:vote][:uuid]
 
     tmp_vote = Vote.where(ip_addr:  @vote.ip_addr,  bet_id: @bet.id)
 
@@ -36,7 +36,7 @@ class Api::V1::VotesController < Api::V1::ApiController
       }, status: :ok
       return
 
-    # elsif tmp_vote.present?
+    # elsif tmp_vote.any?
     #   render json: {
     #       status: 'error',
     #       error: "ALREADY_VOTED",

@@ -1,5 +1,5 @@
 class Vote < ApplicationRecord
-  belongs_to :bet
+  belongs_to :bet, counter_cache: true
   validates :username, length: { in: 2..80 }, allow_blank: false
   validates :username, format: { without: /\s/ }
 

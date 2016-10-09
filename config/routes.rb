@@ -10,8 +10,11 @@ Rails.application.routes.draw do
 
     namespace :v1 do
 
-      resources :bets, only: [:index, :new, :create, :show] do
+      resources :bets, only: [:index, :new, :create, :show, :trending] do
         resources :votes, only: [:create, :index]
+        collection do
+          get :trending
+        end
       end
 
     end

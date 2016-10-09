@@ -19,6 +19,23 @@ before_action :set_bet, only: [:show, :update, :destroy]
 
   end
 
+
+  def trending
+
+    if params[:last]
+      @bets = Bet.trending.last(params[:last])
+    else
+      @bets = Bet.trending
+    end
+
+    render json: {
+        bets: @bets,
+        status: 'success',
+        error: nil
+    }, status: :ok
+
+  end
+
   # GET /bets/1
   def show
     if @bet.present?
