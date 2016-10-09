@@ -17,7 +17,9 @@ class Api::V1::ApiController < ApplicationController
 
           unless @api_app.test_mode
 
-            origin_domain = URI.parse(request.headers['origin']).host if request.headers['origin']
+            origin_domain = URI.parse(request.referrer).host if request.referrer
+
+            p "////////////////// origin referer: #{origin_domain}"
 
             if @api_app.web_app and @api_app.origin_domain != origin_domain
 

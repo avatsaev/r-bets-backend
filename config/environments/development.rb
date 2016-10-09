@@ -30,16 +30,12 @@ Rails.application.configure do
   ac_origins.map! { |url| /#{url}/ }
   config.action_cable.allowed_request_origins = ac_origins
 
-  p "-----------------------------------------------------------//"
-  p ac_origins
 
   config.middleware.insert_before 0, Rack::Cors do
 
     cors_origins = ENV['CORS_ALLOWED_ORIGINS'].split(',')
     cors_origins.map! { |url| /#{url}/ }
 
-    p "======================================================//"
-    p cors_origins
 
     allow do
       origins cors_origins
