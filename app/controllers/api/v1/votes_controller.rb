@@ -36,13 +36,13 @@ class Api::V1::VotesController < Api::V1::ApiController
       }, status: :ok
       return
 
-    # elsif tmp_vote.any?
-    #   render json: {
-    #       status: 'error',
-    #       error: "ALREADY_VOTED",
-    #       msg: "You've already voted on this"
-    #   }, status: :ok
-    #   return
+    elsif tmp_vote.any?
+      render json: {
+          status: 'error',
+          error: "ALREADY_VOTED",
+          msg: "You've already voted on this"
+      }, status: :ok
+      return
     else
 
       if @vote.answer != "a" and @vote.answer != "b"
