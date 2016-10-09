@@ -23,7 +23,7 @@ before_action :set_bet, only: [:show, :update, :destroy]
   def trending
 
     if params[:first]
-      @bets = Bet.trending.last(params[:first])
+      @bets = Bet.trending.first(params[:first])
     else
       @bets = Bet.trending
     end
