@@ -4,7 +4,7 @@ class Bet < ApplicationRecord
   validates :title, presence: true
   validates :answer_a, presence: true
   validates :answer_b, presence: true
-  scope :trending, ->{order('created_at DESC, votes_count DESC')}
+  scope :trending, ->{where("created_at >= ?", Time.zone.now.beginning_of_day).order('votes_count DESC')}
 
   has_many :votes
 
