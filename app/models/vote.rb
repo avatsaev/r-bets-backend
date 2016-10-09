@@ -37,7 +37,8 @@ class Vote < ApplicationRecord
 
   def register_vote
     self.increment_bet_vote_count
-    BroadcastVoteJob.perform_later(self)
+    #BroadcastVoteJob.perform_later(self)
+    ActionCable.server.broadcast("bet_channel_#{self.bet.id}", {event: 'new_vote',bet: self.bet, vote: self})
 
   end
 
