@@ -5,8 +5,8 @@ before_action :set_bet, only: [:show, :update, :destroy]
   # GET /bets
   def index
 
-    if params[:last]
-      @bets = Bet.last(params[:last])
+    if params[:first]
+      @bets = Bet.last(params[:first])
     else
       @bets = Bet.all
     end
