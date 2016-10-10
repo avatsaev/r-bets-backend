@@ -28,6 +28,15 @@ before_action :set_bet, only: [:show, :update, :destroy]
       @bets = Bet.trending
     end
 
+
+    if @bets.empty?
+      if params[:first]
+        @bets = Bet.order(votes_count: :desc).first(params[:first])
+      else
+        @bets = Bet.order(votes_count: :desc)
+      end
+    end
+
     render json: {
         bets: @bets,
         status: 'success',
