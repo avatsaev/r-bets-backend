@@ -78,7 +78,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.6.0)
+    puma (3.12.6)
     rack (2.0.1)
     rack-attack (5.0.1)
       rack
@@ -174,7 +174,7 @@ DEPENDENCIES
   pg (~> 0.18)
   pry
   pry-rails
-  puma (~> 3.0)
+  puma (~> 3.12)
   rack-attack
   rack-cors
   rack-timeout
